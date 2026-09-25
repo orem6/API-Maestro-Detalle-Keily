@@ -8,8 +8,26 @@ const registroRoutes = require('./routes/registro.routes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
+const developmentOrigins = new Set([
+  'http://localhost',
+  'http://localhost:5500',
+  'http://127.0.0.1',
+  'http://127.0.0.1:5500'
+]);
+
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin) return callback(null, true);
+
+    const isProduction = process.env.NODE_ENV === 'production';
+    const isAllowed = isProduction
+      ? origin === process.env.FRONTEND_URL?.trim()
+      : developmentOrigins.has(origin);
+
+    return callback(null, isAllowed);
+  }
+}));
 app.use(express.json({ limit: '100kb' }));
 
 app.get('/api/health', async (req, res) => {
