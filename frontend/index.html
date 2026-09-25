@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tablero de progreso de misiones">
+  <title>Tablero de Misiones</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div><p class="eyebrow">Control academico</p><h1>Tablero de Misiones</h1><p>Seguimiento claro del avance de cada estudiante.</p></div>
+    <a class="hero-link" href="#registro">Actualizar progreso</a>
+  </header>
+  <main>
+    <p id="api-status" class="api-status" role="status">Conectando con la API...</p>
+    <section class="metrics" aria-label="Resumen">
+      <article><span>Estudiantes registrados</span><strong id="metric-students">--</strong></article>
+      <article><span>Promedio de cumplimiento</span><strong id="metric-average">--</strong></article>
+      <article><span>Estudiantes al 100%</span><strong id="metric-complete">--</strong></article>
+    </section>
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">Seguimiento</p><h2>Estudiantes</h2></div><label class="search">Buscar <input id="search" type="search" placeholder="Carnet o nombre"></label></div>
+      <div class="table-wrap"><table><thead><tr><th>Carnet</th><th>Estudiante</th><th>Correo</th><th>Progreso</th><th>% Avance</th><th>Estado</th></tr></thead><tbody id="students-body"></tbody></table></div>
+      <p id="empty-students" class="empty" hidden>No hay estudiantes para mostrar.</p>
+    </section>
+    <section class="workspace">
+      <article id="student-detail" class="panel detail"><p class="eyebrow">Detalle</p><h2>Selecciona un estudiante</h2><p class="muted">Consulta sus misiones desde la tabla.</p></article>
+      <section id="registro" class="panel form-panel"><p class="eyebrow">Registro</p><h2>Registrar / actualizar progreso</h2><form id="progress-form" novalidate>
+        <div class="fields"><label>Carnet<input name="carnet" required maxlength="25" value="1890-23-4982"></label><label>Nombre<input name="nombre" required maxlength="150" value="Keily Fabiola Orellana Marroquín"></label><label class="wide">Correo<input name="correo" type="email" required maxlength="150" autocomplete="email"></label></div>
+        <fieldset><legend>Misiones</legend><div id="mission-inputs" class="mission-inputs"><p class="muted">Cargando catálogo...</p></div></fieldset>
+        <div class="form-actions"><button id="save-button" type="submit">Guardar progreso</button><p id="form-message" role="status"></p></div>
+      </form></section>
+    </section>
+  </main>
+  <script src="js/config.js"></script><script src="js/api.js"></script><script src="js/app.js"></script>
+</body>
+</html>
